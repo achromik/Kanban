@@ -1,0 +1,35 @@
+{ 
+	"name": "achromik-Zadanie-12.7",
+	"version": "1.0.0",
+	"description": "Zadanie 12.7 z kodilla.com AJAX - Kanban ",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "Aleksander Chromik",
+	"license": "ISC",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/achromik/Zadanie-12.7.git"
+	},
+	"bugs": {
+		"url": "https://github.com/achromik/Zadanie-12.7/issues"
+	},
+	"homepage": "https://github.com/achromik/Zadanie-12.7#readme",
+	"devDependencies": {
+		"autoprefixer": "^7.1.2",
+		"cssnano": "^3.10.0",
+		"grunt": "^1.0.1",
+		"grunt-browser-sync": "^2.2.0",
+		"grunt-contrib-cssmin": "^2.2.1",
+		"grunt-contrib-htmlmin": "^2.4.0",
+		"grunt-contrib-imagemin": "^2.0.1",
+		"grunt-contrib-jshint": "^1.1.0",
+		"grunt-contrib-uglify": "^3.0.1",
+		"grunt-contrib-watch": "^1.0.0",
+		"grunt-postcss": "^0.8.0",
+		"grunt-sass": "^2.0.0",
+		"pixrem": "^4.0.1"
+	}
+}
