@@ -29,14 +29,14 @@ function initSortable() {
         connectWith: '.card-list',
         placeholder: 'card-placeholder',
         forcePlaceholderSize: true,
-        
+
         //set placeholder height equal to height of draging element
         start: function (event, ui) {
             ui.placeholder.height(ui.helper.outerHeight());
         },
 
 
-        //API ***** moving card to anothe column */
+        //API ***** moving card to another column */
         stop: function (event, ui ) {
             
             var toID = ui.item.parents('.column').attr('id'),

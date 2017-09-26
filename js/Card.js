@@ -51,6 +51,11 @@ Card.prototype = {
 
         if (element && element.tagName.toUpperCase() === "P") {
 
+            //get size of element
+            var height = $(element).outerHeight(),
+                width = $(element).outerWidth();
+
+
             //hide descriptions's element
             element.style.display = "none";
             
@@ -58,8 +63,14 @@ Card.prototype = {
             cardDescription = element.innerHTML;
 
             //make input field
-            $input = $('<input>').val(cardDescription).attr('placeholder', 'Enter new name');
-            $input.width($('#'+self.id).width());
+            $input = $('<input>').val(cardDescription).attr('placeholder', 'Enter new name').addClass('card-description');
+            //$input.width($('#'+self.id).width());
+
+            //make element fit to content
+            $input.css({
+                width: width,
+                height: height 
+            });
             
             //insert input field to DOM
             $(element).before($input);

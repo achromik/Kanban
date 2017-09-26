@@ -93,7 +93,7 @@ Column.prototype = {
             columnName = span.innerHTML;
 
             //make input field
-            $input = $('<input>').val(columnName).attr('placeholder', 'Enter new name');
+            $input = $('<input>').val(columnName).attr('placeholder', 'Enter new name').addClass('column-title');
 
             //make element fit to content
             $input.css({
