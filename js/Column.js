@@ -57,17 +57,24 @@ Column.prototype = {
 	deleteColumn: function() {
         var self = this;
 
-        $.ajax({
-            url: baseUrl + '/column/' + self.id,
-            method: 'DELETE',
-            success: function(response) {
-                self.element.remove();
-            }
-        });
+        if ($('#' + self.id + ' .card-list').children().length == 0 ) {
+            
+
+            $.ajax({
+                url: baseUrl + '/column/' + self.id,
+                method: 'DELETE',
+                success: function(response) {
+                    self.element.remove();
+                }
+            }); 
+        } else {
+            alert('CAN\'T DELETE! Column is not empty!');
+        }
+
     },
 
     changeColumnName: function(event) {
-        var self= this,
+        var self = this,
             span,
             $input,
             columnName;
