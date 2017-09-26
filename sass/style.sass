@@ -1,72 +1,105 @@
-body 
-    margin: 0
-* 
+
+@mixin clearfix()
+    &::after,
+    &::before
+        content: ''
+        clear: both
+        display: table
+
+@mixin marginAndRadius()
+    border-radius: 5px
+    margin: 5px
+
+*
     box-sizing: border-box
 
-.ui-sortable 
-    min-height: 80px
+body
+    //background: url('../img/grey_wash_wall.png')
+    background: url('../img/cork.jpg')
+    color: #ddd
+    
 
-.btn-delete 
-    position: absolute
-    right: 0
-    top: 0
-    width: 22px
-    height: 22px
-    border: 0
-    background-color: rgba(0,0,0,0.4)
-    color: white
+.kanban
+    text-align: center
+    font-weight: 700
+    h1
+        font-weight: 700
+        color: snow
+        text-shadow: 2px 2px 3px darkslategrey
+    
+.board
+    background-color: #555555
+    text-align: center
+    position: relative
+    padding: 10px 10px
+    margin: 30px auto
+    border-radius: 5px
+    box-shadow: 2px 2px 10px rgba(0, 0 ,0, .5)    
+    .column-container
+        @include clearfix()
 
-/* BOARD */
-.board h1 
-    margin-left: 8px
+.board:nth-of-type(even)
+    background-color: #647277
 
 .column-container 
-    display: flex
-    flex-direction: row
-    flex-wrap: nowrap
+    margin-top: 15px    
 
-
-
-/* COLUMN */
-.column 
-    order: 1
-    min-width: 300px
-    min-height: 50vh
-    background-color: lightgrey
-    margin-left: 8px
-    list-style: none
+.column
+    width: calc(20% - ( 2 * 5px)
+    min-width: 275px
+    min-height: 300px
+    display: inline-table
+    background-color: rgba(177, 174, 174, 0.66)
+    border: 1px solid #333
+    @include marginAndRadius()
     position: relative
+    small
+        color: #333
+        font-size: 13px
 
-.column-add-card 
-    cursor: pointer
-    text-decoration: underline
-    margin: 5px 8px
-    display: block
-
-
-/* STYLE KARTY */
 .card 
-    box-sizing: border-box
-    display: block
-    height: 60px
-    margin-bottom: 5px
-    padding: 4px
-    overflow: hidden
+    border: 1px solid #454545
+    @include marginAndRadius()
+    background-color: #efdb9a
     position: relative
+    padding-top: 35px
 
-.card-list 
+
+.card-description
+    border: 1px solid #444
+    background-color: darkgray
+    color: black
+    min-height: 40px
+    text-align: center
+    @include marginAndRadius()
+    
+.btn[class*='delete']
+    position: absolute
+    top: 5px
+    right: 5px
+    width: 20px
+    line-height: 11px
+    padding: 3px
+    font-size: 11px
+    text-transform: uppercase
+    
+
+
+ul
+    min-height: 40px
     list-style: none
-    margin: 5px
-    padding: 0px
+    padding: 0
+    //margin: 5px
 
-.card-description 
-    margin: 2px 0
+.card-placeholder
+    //background-color: #252525
+    background: url('../img/bg-transp.jpg')
+    min-height: 60px
+    @include marginAndRadius()
 
-.card-placeholder 
-    box-sizing: border-box
-    display: block
-    height: 60px
-    margin-bottom: 5px
-    border: 2px solid lightgrey
-    background-color: lightblue
-
+@media (max-width: 480px)
+    .board
+        margin-left: 5px
+        margin-right: 5px
+        padding-left: 5px
+        padding-right: 5px

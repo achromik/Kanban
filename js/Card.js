@@ -7,7 +7,8 @@ function Card(id, name) {
 
 	function createCard() {
 		var card = $('<li class="card"></li>').attr('id', self.id);
-		var cardDeleteBtn = $('<button class="btn-delete">x</button>');
+		var cardDeleteBtn = $('<button>').addClass('card-delete btn btn-danger')
+                            .append('<i>').addClass('fa fa-times');
 		var cardDescription = $('<p class="card-description"></p>');
 		
 		cardDeleteBtn.on('click', function(){

@@ -10,8 +10,9 @@ function Column(id, name) {
 		var column = $('<div class="column"></div>').attr('id', self.id);
 		var columnTitle = $('<h2 class="column-title"><span>' + self.name + '</span></h2>');
 		var columnCardList = $('<ul class="card-list"></ul>');
-		var columnDelete = $('<button class="btn-delete">x</button>');
-		var columnAddCard = $('<button class="column-add-card">Dodaj kartę</button>');
+		var columnDelete = $('<button>').addClass('column-delete btn btn-danger')
+                            .append('<i>').addClass('fa fa-times');
+		var columnAddCard = $('<button>').addClass('add-card btn btn-success').text('New card');
 		
 		// add event listeners
 		columnDelete.click(function() {
@@ -68,7 +69,7 @@ Column.prototype = {
                 }
             }); 
         } else {
-            alert('CAN\'T DELETE! Column is not empty!');
+            confirm('CAN\'T DELETE! Column is not empty!');
         }
 
     },
