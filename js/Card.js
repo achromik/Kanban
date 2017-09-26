@@ -10,72 +10,15 @@ function Card(id, name) {
 		var cardDeleteBtn = $('<button class="btn-delete">x</button>');
 		var cardDescription = $('<p class="card-description"></p>');
 		
-		cardDeleteBtn.click(function(){
+		cardDeleteBtn.on('click', function(){
 			self.removeCard();
 		});
         
         //********** change card's description
         cardDescription.on('click', function(event) {
-            var element,
-                $input,
-                cardDescription,
-                columnID = $('#' + self.id).parents('.column').attr('id');
-
-            element = event.target;
-
-            if (element && element.tagName.toUpperCase() === "P") {
-
-                //hide descriptions's element
-                element.style.display = "none";
-                
-                //get current description
-                cardDescription = element.innerHTML;
-
-                //make input field
-                $input = $('<input>').val(cardDescription).attr('placeholder', 'Enter new name');
-                $input.width($('#'+self.id).width());
-                
-                //insert input field to DOM
-                $(element).before($input);
-
-                //set focus and select all text in field
-                $input.focus();
-                $input.select();
-
-                //API change description when field is blur or pressed ENTER key
-                $input.on('blur keypress', function(event) {
-                    var keycode = event.keycode || event.which;
-                    
-                    if(event.type == 'blur' ||  keycode == '13' || keycode == '10') {
-                        event.preventDefault();
-                         
-                        //new description is not empty and not the same than old
-                        if ($input.val() !== '' && $input.val() !== cardDescription) {
-                            var descriptionToChange = $input.val();
-
-                            $.ajax({
-                                url: baseUrl + '/card/' + self.id,
-                                method: 'PUT',
-                                data: {
-                                    id: self.id,
-                                    name: descriptionToChange,
-                                    bootcamp_kanban_column_id: columnID
-                                },
-                                success: function(response) {
-                                    $(element).text(descriptionToChange);
-                                    $input.remove();
-                                    element.style.display = "";
-                                }
-                            });
-                        //no changes in description  
-                        } else {
-                            $input.remove();
-                            element.style.display = "";
-                        }
-                    }
-                }); // END API chane description
-            } 
-        });  //END change card's description
+            self.changeName(event);
+        });
+            
 
 		card.append(cardDeleteBtn);
 		cardDescription.text(self.name);
@@ -94,5 +37,68 @@ Card.prototype = {
                 self.element.remove();
             }
         });
-	}
+    },
+
+    changeName: function(event) {
+        var self = this,
+            element,
+            $input,
+            cardDescription,
+            columnID = $('#' + self.id).parents('.column').attr('id');
+
+        element = event.target;
+
+        if (element && element.tagName.toUpperCase() === "P") {
+
+            //hide descriptions's element
+            element.style.display = "none";
+            
+            //get current description
+            cardDescription = element.innerHTML;
+
+            //make input field
+            $input = $('<input>').val(cardDescription).attr('placeholder', 'Enter new name');
+            $input.width($('#'+self.id).width());
+            
+            //insert input field to DOM
+            $(element).before($input);
+
+            //set focus and select all text in field
+            $input.focus();
+            $input.select();
+
+            //API change description when field is blur or pressed ENTER key
+            $input.on('blur keypress', function(event) {
+                var keycode = event.keycode || event.which;
+                
+                if(event.type == 'blur' ||  keycode == '13' || keycode == '10') {
+                    event.preventDefault();
+                    
+                    //new description is not empty and not the same than old
+                    if ($input.val() !== '' && $input.val() !== cardDescription) {
+                        var descriptionToChange = $input.val();
+
+                        $.ajax({
+                            url: baseUrl + '/card/' + self.id,
+                            method: 'PUT',
+                            data: {
+                                id: self.id,
+                                name: descriptionToChange,
+                                bootcamp_kanban_column_id: columnID
+                            },
+                            success: function(response) {
+                                $(element).text(descriptionToChange);
+                                $input.remove();
+                                element.style.display = "";
+                            }
+                        });
+                    //no changes in description  
+                    } else {
+                        $input.remove();
+                        element.style.display = "";
+                    }
+                }
+            }); // END API chane description
+        } 
+    } //END change card's description
 };

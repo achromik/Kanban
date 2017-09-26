@@ -37,69 +37,8 @@ function Column(id, name) {
 
         //********** change column's name
         columnTitle.on('click', function(event) {
-            var span,
-                $input,
-                columnName;
-
-            span = event.target;
-
-            if (span && span.tagName.toUpperCase() === "SPAN") {
-
-                //hide name's span
-                span.style.display = "none";
-                
-                //get current name
-                columnName = span.innerHTML;
-
-                //make input field
-                $input = $('<input>').val(columnName).attr('placeholder', 'Enter new name');
-                $input.css({
-                    width: $('#' + self.id).width(),
-                    height: $('#' + self.id + ' .column-title').height() - 2 //koniec w pracy
-                });
-                
-                //insert input field to DOM
-                $(span).before($input);
-
-                //set focus and select all text in field
-                $input.focus();
-                $input.select();
-
-                //API change name when field is blur or pressed ENTER key
-                $input.on('blur keypress', function(event) {
-                    var keycode = event.keycode || event.which;
-                    
-                    
-                    if(event.type == 'blur' ||  keycode == '13' || keycode == '10') {
-                        event.preventDefault();
-                         
-                        //new description is not empty and not the same than old
-                        if ($input.val() !== '' && $input.val() !== columnName) {
-                            var nameToChange = $input.val();
-
-                            $.ajax({
-                                url: baseUrl + '/column/' + self.id,
-                                method: 'PUT',
-                                data: {
-                                    id: self.id,
-                                    name: nameToChange
-                                },
-                                success: function(response) {
-                                    $(span).text(nameToChange);
-                                    $input.remove();
-                                    span.style.display = "";
-                                }
-                            });
-                        // no changes in name        
-                        } else {
-                            $input.remove();
-                            span.style.display = "";
-                        }
-                    }
-                }); // END API chane name
-            } 
-
-        }); //END change colmns's name
+            self.changeColumnName(event);
+        });
 
 		// creating colun's element
 		column.append(columnTitle)
@@ -126,4 +65,74 @@ Column.prototype = {
             }
         });
     },
+
+    changeColumnName: function(event) {
+        var self= this,
+            span,
+            $input,
+            columnName;
+
+        span = event.target;
+
+        if (span && span.tagName.toUpperCase() === "SPAN") {
+
+            //get height of element
+            var height = $('#' + self.id + ' .column-title').height();
+            //hide name's span
+            span.style.display = "none";
+            
+            //get current name
+            columnName = span.innerHTML;
+
+            //make input field
+            $input = $('<input>').val(columnName).attr('placeholder', 'Enter new name');
+
+            //make element fit to content
+            $input.css({
+                width: $('#' + self.id).width() - 2,
+                marginLeft: 1,
+                height: height - 2 
+            });
+
+            //insert input field to DOM
+            $(span).before($input);
+
+            //set focus and select all text in field
+            $input.focus();
+            $input.select();
+
+            //API change name when field is blur or pressed ENTER key
+            $input.on('blur keypress', function(event) {
+                var keycode = event.keycode || event.which;
+                
+                
+                if(event.type == 'blur' ||  keycode == '13' || keycode == '10') {
+                    event.preventDefault();
+                    
+                    //new description is not empty and not the same than old
+                    if ($input.val() !== '' && $input.val() !== columnName) {
+                        var nameToChange = $input.val();
+
+                        $.ajax({
+                            url: baseUrl + '/column/' + self.id,
+                            method: 'PUT',
+                            data: {
+                                id: self.id,
+                                name: nameToChange
+                            },
+                            success: function(response) {
+                                $(span).text(nameToChange);
+                                $input.remove();
+                                span.style.display = "";
+                            }
+                        });
+                    // no changes in name        
+                    } else {
+                        $input.remove();
+                        span.style.display = "";
+                    }
+                }
+            }); // END API chane name
+        } 
+    }
 };
