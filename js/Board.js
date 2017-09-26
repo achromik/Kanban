@@ -28,6 +28,13 @@ function initSortable() {
     $('.card-list').sortable({
         connectWith: '.card-list',
         placeholder: 'card-placeholder',
+        forcePlaceholderSize: true,
+        
+        //set placeholder height equal to height of draging element
+        start: function (event, ui) {
+            ui.placeholder.height(ui.helper.outerHeight());
+        },
+
 
         //API ***** moving card to anothe column */
         stop: function (event, ui ) {
