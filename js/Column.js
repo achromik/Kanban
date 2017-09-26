@@ -6,14 +6,14 @@ function Column(id, name) {
 	this.element = createColumn();
 
 	function createColumn() {
-		// TWORZENIE NOWYCH WĘZŁÓW
+        //make column's elements
 		var column = $('<div class="column"></div>').attr('id', self.id);
 		var columnTitle = $('<h2 class="column-title"><span>' + self.name + '</span></h2>');
 		var columnCardList = $('<ul class="card-list"></ul>');
 		var columnDelete = $('<button class="btn-delete">x</button>');
 		var columnAddCard = $('<button class="column-add-card">Dodaj kartę</button>');
 		
-		// PODPINANIE ODPOWIEDNICH ZDARZEŃ POD WĘZŁY
+		// add event listeners
 		columnDelete.click(function() {
 			self.deleteColumn();
 		});
@@ -34,10 +34,8 @@ function Column(id, name) {
                 }
             });
         });
-        
 
-
-        //********** change name column
+        //********** change column's name
         columnTitle.on('click', function(event) {
             var span,
                 $input,
@@ -55,21 +53,27 @@ function Column(id, name) {
 
                 //make input field
                 $input = $('<input>').val(columnName).attr('placeholder', 'Enter new name');
-                $input.width($('#'+self.id).width());
+                $input.css({
+                    width: $('#' + self.id).width(),
+                    height: $('#' + self.id + ' .column-title').height() - 2 //koniec w pracy
+                });
                 
                 //insert input field to DOM
                 $(span).before($input);
 
+                //set focus and select all text in field
                 $input.focus();
                 $input.select();
 
+                //API change name when field is blur or pressed ENTER key
                 $input.on('blur keypress', function(event) {
                     var keycode = event.keycode || event.which;
+                    
                     
                     if(event.type == 'blur' ||  keycode == '13' || keycode == '10') {
                         event.preventDefault();
                          
-                        
+                        //new description is not empty and not the same than old
                         if ($input.val() !== '' && $input.val() !== columnName) {
                             var nameToChange = $input.val();
 
@@ -86,48 +90,31 @@ function Column(id, name) {
                                     span.style.display = "";
                                 }
                             });
-
+                        // no changes in name        
                         } else {
                             $input.remove();
                             span.style.display = "";
                         }
                     }
-                });
+                }); // END API chane name
             } 
-                
 
-            // var nameToChange =  prompt("Enter new name").toString();  //without .toString() dosent change name (empty string)
-            // // var nameToChange = "z kliku";
-            // //console.log(typeof nameToChange);
-           
+        }); //END change colmns's name
 
-
-            // // event.preventDefault();
-            // $.ajax({
-            //     url: baseUrl + '/column/' + self.id,
-            //     method: 'PUT',
-            //     data: {
-            //         id: self.id,
-            //         name: nameToChange
-            //     },
-            //     success: function(response) {
-            //         $('#' + response.id + ' .column-title').text(nameToChange);
-            //     }
-            // });
-        });
-			
-			// KONSTRUOWANIE ELEMENTU KOLUMNY
+		// creating colun's element
 		column.append(columnTitle)
 			.append(columnDelete)
 			.append(columnAddCard)
 			.append(columnCardList);
 			return column;
-		}
-	}
+    }
+}
+    
 Column.prototype = {
 	createCard: function(card) {
 	    this.element.children('ul').append(card.element);
-	},
+    },
+    
 	deleteColumn: function() {
         var self = this;
 
@@ -139,6 +126,4 @@ Column.prototype = {
             }
         });
     },
-    
-
 };
