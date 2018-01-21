@@ -1,4 +1,19 @@
 # Zadanie-12.7
 
+##  AJAX - Kanban
 
-#### Zadanie 12.7 z kodilla.com AJAX - Kanban 
+Used technologies: JS, jQuery, REST API, HTML, CSS, Sass
+
+
+
+#### Installation
+
+`npm install`
+
+#### Run
+`grunt`
+
+Live v
+
+
+

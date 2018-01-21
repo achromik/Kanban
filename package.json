@@ -1,7 +1,7 @@
-{ 
-	"name": "achromik-Zadanie-12.7",
+{
+	"name": "achromik-kanban",
 	"version": "1.0.0",
-	"description": "Zadanie 12.7 z kodilla.com AJAX - Kanban ",
+	"description": "AJAX - Kanban ",
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
@@ -11,12 +11,12 @@
 	"license": "ISC",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/achromik/Zadanie-12.7.git"
+		"url": "https://github.com/achromik/Kanban.git"
 	},
 	"bugs": {
-		"url": "https://github.com/achromik/Zadanie-12.7/issues"
+		"url": "https://github.com/achromik/Kanban/issues"
 	},
-	"homepage": "https://github.com/achromik/Zadanie-12.7#readme",
+	"homepage": "https://github.com/achromik/Kanban#readme",
 	"devDependencies": {
 		"autoprefixer": "^7.1.2",
 		"cssnano": "^3.10.0",
