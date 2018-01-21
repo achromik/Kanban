@@ -1,6 +1,7 @@
-# Zadanie-12.7
+#  AJAX - Kanban
 
-##  AJAX - Kanban
+[Live version](http://aleksanderchromik.pl/Kanban/)
+
 
 Used technologies: JS, jQuery, REST API, HTML, CSS, Sass
 
@@ -13,7 +14,7 @@ Used technologies: JS, jQuery, REST API, HTML, CSS, Sass
 #### Run
 `grunt`
 
-Live v
+
 
 
 
